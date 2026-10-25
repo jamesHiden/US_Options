@@ -6,7 +6,7 @@ import pytz
 
 # Define Parameters
 ticker = "NVDA"  # Replace with your desired ticker
-min_days_to_expiration = 50  # Minimum days to expiration
+max_days_to_expiration = 50  # Only expirations within this many days
 min_daily_distance = 0.5  # Minimum daily distance for short leg (%)
 min_return = 6  # Minimum return (%)
 min_distance = 10  # Minimum distance (%) for the short leg
@@ -41,7 +41,7 @@ results = []
 for exp_date in expiration_dates:
     exp_date_dt = datetime.strptime(exp_date, "%Y-%m-%d")
     days_to_exp = (exp_date_dt - datetime.now()).days
-    if days_to_exp > min_days_to_expiration:
+    if days_to_exp > max_days_to_expiration:
         continue
 
     options_chain = stock.option_chain(exp_date)
